@@ -1,0 +1,16 @@
+.App{
+  min-height: 100vh;
+  width: 100%;
+  background: -webkit-linear-gradient(bottom, #f7f8fa, #f7f8fa 33%, #039be5 33%, #039be5);
+  position: absolute;
+}
+.App-header {
+  margin-top: 10em;
+  color: white;
+}
+.search-bar{
+  background-color: #fff;
+}
+nav .input-field label.active i {
+  color: #3b4a4d;
+}
