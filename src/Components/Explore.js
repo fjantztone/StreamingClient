@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import createHistory from 'history/createBrowserHistory';
 import DataFinder from './Data/DataFinder';
 import LinePlot from './Plot/LinePlot';
-import BarPlot from './Plot/BarPlot';
 import CategoryBarPlot from './Plot/CategoryBarPlot';
 import SubscribeList from './SubscribeList/SubscribeList';
 import TopList from './TopList/TopList';
@@ -85,7 +84,7 @@ class Explore extends Component{
                   <i className="material-icons">menu</i>
                 </a>
                 <ul>
-                  <li><a className="btn-floating" onClick={() => {alert('Do you want to remove this cache?')}}><i className="material-icons">mode_edit</i></a></li>
+                  <li><a className="btn-floating" onClick={() => {alert('Not implemented yet..')}}><i className="material-icons">mode_edit</i></a></li>
                   <li><a className="btn-floating black" onClick={() => {this.toggle('hideDataFinder')}}><i className="material-icons">insert_chart</i></a></li>
                 </ul>
               </div>

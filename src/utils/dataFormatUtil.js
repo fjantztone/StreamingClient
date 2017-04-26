@@ -19,7 +19,7 @@ const dataFormatUtil = {
 
   },
   toRangeData : (datasets, type) => {
-    if(type !== 'bar' && type !== 'donut') throw new Error("Invalid type");
+    if(type !== 'pie' && type !== 'donut') throw new Error("Invalid type");
     let obj = {};
 
     if(Array.isArray(datasets) && datasets.length){

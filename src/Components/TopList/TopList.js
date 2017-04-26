@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Slider from './Slider';
 import DonutPlot from '../Plot/DonutPlot';
-import dataFormatUtil from '../../utils/dataFormatUtil';
 import update from 'immutability-helper';
 
 class TopList extends Component{

@@ -21,11 +21,6 @@ class CategoryBarPlot extends Component{
       },
       tooltip: {
         show: false
-      },
-      bar : {
-        width: {
-            ratio: 0.65
-        }
       }
     }
     const categoryData = dataFormatUtil.toCategoryData(data);

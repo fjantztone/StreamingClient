@@ -6,32 +6,42 @@ import dataFormatUtil from '../../utils/dataFormatUtil';
 
 class LinePlot extends Component{
   render(){
-    const axisOptions = {
-      x: {
-        type: 'timeseries',
-        tick: {
-            format: '%m-%d'
+    const options = {
+      axis : {
+        x: {
+          type: 'timeseries',
+          tick: {
+              format: '%m-%d'
+          },
+          label : 'Date'
         },
-        label : 'Date'
+        y : {
+          label : 'Values'
+        }
       },
-      y : {
-        label : 'Values'
+      legend : {
+        show : true
+      },
+      zoom : {
+        enabled: true
+      },
+      line : {
+          connectNull: true
+      },
+      padding : {
+        right : 25
+      },
+      grid : {
+        x : {
+          show : true
+        }
       }
-    }
-    const legendOptions = {
-      show : true
-    }
-    const zoomOptions = {
-      enabled: true
-    }
-    const lineOptions = {
-        connectNull: true
     }
     if(this.props.hasOwnProperty('data')){ //TODO: Store on load????
       const data = dataFormatUtil.toLineData(this.props.data);
       return (
         <div className="lineplot-wrapper">
-          <C3Chart data={data} axis={axisOptions} legend={legendOptions} zoom={zoomOptions} line={lineOptions}/>
+          <C3Chart data={data} axis={options.axis} legend={options.legend} zoom={options.zoom} line={options.line} padding={options.padding} grid={options.grid}/>
         </div>
       );
     }
