@@ -1,39 +1,22 @@
 import React, {Component} from 'react';
 import WS from './WS';
-import CategoryBarPlot from '../Plot/CategoryBarPlot';
+import TickPlot from '../Plot/TickPlot';
 import update from 'immutability-helper';
 
 class SubscribeList extends Component{
   constructor(){
     super();
     this.state = {
-      data : []
+      data : {}
     }
     this.update = this.update.bind(this);
   }
-  update(key, value){
-    const keys = this.state.data.map(item => JSON.stringify(item.key));
-    const index = keys.indexOf(JSON.stringify(key));
-
-    if(index !== -1){
-      this.setState(prevState => {
-        return update(prevState, {
-          data : {[index] : {value : {$set : value}}}
-        });
+  update(data){
+    this.setState(prevState => {
+      return update(prevState, {
+          data : {$set : data}
       });
-    }
-    else{
-      let params = {
-        key : key,
-        value : value
-      }
-      this.setState(prevState => {
-        return update(prevState, {
-          data : {$push : [params]}
-        });
-      });
-    }
-
+    });
   }
   render(){
     const propData = this.props.data;
@@ -42,8 +25,8 @@ class SubscribeList extends Component{
 
     return (
       <div className="subscribelist-wrapper">
-        {keys.length > 0 && <WS keys={keys} update={this.update}></WS>}
-        {stateData.length > 0 && <CategoryBarPlot data={stateData}/>}
+        {Object.keys(stateData).length > 0 && <TickPlot data={stateData}></TickPlot>}
+        {keys.length > 0 && <WS keys={keys} update={this.update} url={"ws://localhost:8081/live"}></WS>}
       </div>
     );
   }

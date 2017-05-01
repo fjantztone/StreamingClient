@@ -55,6 +55,20 @@ const dataFormatUtil = {
    }
 
   },
+  toFlowData : (data) => {
+    const date = new Date(data.tick);
+    const key = JSON.stringify(data.key);
+    const value = data.value;
+
+    const columns = [
+      ['x', date],
+      [key, value]
+    ];
+    return {
+      columns : columns,
+      length : 0
+    }
+  },
   flatten : (datasets) =>{
     const flatten = datasets.reduce((acc, value) => acc.concat(Array.isArray(value) ? value : [value]), []);
     return flatten;

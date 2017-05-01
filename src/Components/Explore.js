@@ -84,24 +84,23 @@ class Explore extends Component{
                   <i className="material-icons">menu</i>
                 </a>
                 <ul>
-                  <li><a className="btn-floating" onClick={() => {alert('Not implemented yet..')}}><i className="material-icons">mode_edit</i></a></li>
                   <li><a className="btn-floating black" onClick={() => {this.toggle('hideDataFinder')}}><i className="material-icons">insert_chart</i></a></li>
                 </ul>
               </div>
             </div>
 
             {Object.keys(cache).length && <DataFinder visible={!this.state.hideDataFinder} attributes={cache.attributes} cacheName={cache.name} setData={this.setData} removeData={this.removeData} data={this.state.data} toggleDataFinder={() => {this.toggle('hideDataFinder')}}></DataFinder>}
-
+            <div className="row">
+              {data.subscribe.length  > 0 && <div className="col s12"><div className="col-wrapper col s12 white"><div className="section"><h6>subscribed data</h6></div><div className="divider"></div><div className="section"><SubscribeList data={data.subscribe}></SubscribeList></div></div></div>}
+            </div>
             <div className="row">
               {data.points.length > 0 && <div className="col s12"><div className="col-wrapper col s12 white"><div className="section"><h6>timeseries data</h6></div><div className="divider"></div><div className="section"><LinePlot data={data.points}></LinePlot></div></div></div>}
               </div>
             <div className="row">
-              {data.subscribe.length  > 0 && <div className="col s7"><div className="col-wrapper col s12 white"><div className="section"><h6>subscribed data</h6></div><div className="divider"></div><div className="section"><SubscribeList data={data.subscribe}></SubscribeList></div></div></div>}
+              {data.range.length > 0 && <div className="col s7"><div className="col-wrapper col s12 white"><div className="section"><h6>range data</h6></div><div className="divider"></div><div className="section"><CategoryBarPlot data={data.range}></CategoryBarPlot></div></div></div>}
               {Object.keys(cache).length && <div className="col s5"><div className="col-wrapper col s12 white"><div className="section"><h6>top trends</h6></div><div className="divider"></div><div className="section"><TopList cacheName={cache.name}></TopList></div></div></div>}
             </div>
-            <div className="row">
-              {data.range.length > 0 && <div className="col s6"><div className="col-wrapper col s12 white"><div className="section"><h6>date range data</h6></div><div className="divider"></div><div className="section"><CategoryBarPlot data={data.range}></CategoryBarPlot></div></div></div>}
-            </div>
+
 
           </div>
         );

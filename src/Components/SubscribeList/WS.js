@@ -9,7 +9,10 @@ class WS extends Component{
     }
   }
   sendMessage(key, action){
-    if(this.socket === null) return;
+    if(!this.socket){
+      console.log("Socket was closed due to inactivity, attempting to reconnect to websocket.");
+      this.initializeWebSocket();
+    }
     key = JSON.parse(key);
     const message = {
       "action" : action,
@@ -17,26 +20,27 @@ class WS extends Component{
     }
     this.socket.send(JSON.stringify(message));
   }
-  componentDidMount(){
-    this.socket = new WebSocket("ws://localhost:8081/live");
+  initializeWebSocket(){
+    this.socket = new WebSocket(this.props.url);
     const scope = this;
     this.socket.onopen = function(event) {
 
       console.log("Socket is open");
       scope.props.keys.forEach(key => scope.update(key));
-    	this.onmessage = (ev) => {
+      this.onmessage = (ev) => {
         const data = JSON.parse(ev.data).shift();
-        const key = data.key;
-        const value = data.value;
-        scope.props.update(key, value);
-    	};
+        scope.props.update(data);
+      };
 
-    	// Listen for this.socket closes
-    	this.onclose = (ev) =>  {
-    		console.log('Client notified socket has closed',ev);
+      // Listen for close ev
+      this.onclose = (ev) =>  {
+        console.log('Client notified socket has closed',ev);
         this.socket = null;
-    	};
+      };
     };
+  }
+  componentDidMount(){
+    this.initializeWebSocket();
   }
   update(key){
     this.setState(prevState => {
@@ -51,9 +55,9 @@ class WS extends Component{
         this.sendMessage(key, "UNSUBSCRIBE");
     });
   }
-  componentWillReceiveProps(props, state){
+  componentWillReceiveProps(nextProps, state){
     let currentKeys = this.state.keys;
-    let nextKeys = props.keys;
+    let nextKeys = nextProps.keys;
     if(nextKeys.length > currentKeys.length){
       const key = nextKeys[currentKeys.length];
       this.update(key);

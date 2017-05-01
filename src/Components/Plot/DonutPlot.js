@@ -8,9 +8,6 @@ class DonutPlot extends Component{
     const options = {
       legend : {
         show : false
-      },
-      unloadBeforeLoad : (a) => {
-        console.log(a);
       }
     }
     const donutOptions = {

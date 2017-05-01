@@ -37,11 +37,13 @@ class LinePlot extends Component{
         }
       }
     }
+
     if(this.props.hasOwnProperty('data')){ //TODO: Store on load????
       const data = dataFormatUtil.toLineData(this.props.data);
+      console.log(JSON.stringify(data, null, 2));
       return (
         <div className="lineplot-wrapper">
-          <C3Chart data={data} axis={options.axis} legend={options.legend} zoom={options.zoom} line={options.line} padding={options.padding} grid={options.grid}/>
+          <C3Chart data={data} axis={options.axis} legend={options.legend} zoom={options.zoom} line={options.line} padding={options.padding} grid={options.grid} unloadBeforeLoad={true}/>
         </div>
       );
     }
