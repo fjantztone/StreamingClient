@@ -61,7 +61,7 @@ const dataFormatUtil = {
     const value = data.value;
 
     const columns = [
-      ['x', date],
+      ['dates', date],
       [key, value]
     ];
     return {

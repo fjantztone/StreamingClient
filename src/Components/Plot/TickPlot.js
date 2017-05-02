@@ -8,7 +8,7 @@ class TickPlot extends Component{
   constructor(){
     super();
     this.startData = {
-      x: 'x',
+      x: 'dates',
       columns : []
     }
     this.options = {
@@ -16,7 +16,8 @@ class TickPlot extends Component{
         x: {
           type: 'timeseries',
           tick: {
-              format: '%H:%M:%S',
+              format: '%H:%M:%S'
+
           },
           label : 'Time'
         },
@@ -31,7 +32,10 @@ class TickPlot extends Component{
         enabled: true
       },
       line : {
-          connectNull: true
+          connectNull: true,
+          step: {
+            type: 'step-after'
+          }
       },
       padding : {
         right : 25
@@ -43,12 +47,18 @@ class TickPlot extends Component{
       }
     }
   }
-  componentWillReceiveProps(nextProps){
+  flowTo(data){
     const chart = this.chart.chart;
-    const data = nextProps.data;
     const flowData = dataFormatUtil.toFlowData(data);
     chart.flow(flowData);
   }
+  componentWillReceiveProps(nextProps){
+    this.flowTo(nextProps.data);
+  }
+  componentDidMount(){
+    this.flowTo(this.props.data);
+  }
+
   render(){
     return (
       <div className="lineplot-wrapper">
